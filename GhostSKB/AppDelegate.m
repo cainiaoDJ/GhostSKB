@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <AppKit/AppKit.h>
+#import "PopoverViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,10 +20,15 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
 //    [[NSNotificationCenter defaultCenter] addObserver:self forKeyPath:<#(nonnull NSString *)#> options:NSWorkspaceActiveSpaceDidChangeNotification context:NULL]
+    
+    
     NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
     [nc addObserver:self selector:@selector(handleEvent) name:NSWorkspaceDidActivateApplicationNotification object:NULL];
     
     [self initStatusItem];
+    
+    popover = [[NSPopover alloc] init];
+    popover.contentViewController = [[PopoverViewController alloc] init];
     
 }
 
@@ -48,13 +54,31 @@
     statusItem.image = normalImage;
     statusItem.alternateImage = alternateImage;
     
-    statusItem.menu = self->imenu;
+//    statusItem.menu = self->imenu;
     
     [statusItem setAction:@selector(onStatusItemSelected:)];
 }
 
 - (void) onStatusItemSelected:(id) sender {
-    
+    statusItemSelected = !statusItemSelected;
+    if (sender == NULL) {
+        NSLog(@"sender null");
+    }
+    [self togglePopover:sender];
+}
+
+- (void)showPopover:(id)sender show:(BOOL)show {
+    NSStatusBarButton* button = statusItem.button;
+    if (show) {
+        [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
+    }
+    else {
+        [popover performClose:button];
+    }
+}
+
+- (void)togglePopover:(id)sender {
+    [self showPopover:sender show:statusItemSelected];
 }
 
 - (void) handleEvent {
@@ -70,20 +94,20 @@
 //    NSLog(@"menuNeedsUpdate");
 //}
 
--(void)menuWillOpen:(NSMenu *)menu {
-    NSLog(@"menuWillOpen");
-}
-
--(void)menuDidClose:(NSMenu *)menu {
-    NSLog(@"menuDidClose");
-}
-
--(NSInteger)numberOfItemsInMenu:(NSMenu *)menu {
-    return 7;
-}
-
--(BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel {
-    NSLog(@"hehehehheheh");
-    return YES;
-}
+//-(void)menuWillOpen:(NSMenu *)menu {
+//    NSLog(@"menuWillOpen");
+//}
+//
+//-(void)menuDidClose:(NSMenu *)menu {
+//    NSLog(@"menuDidClose");
+//}
+//
+//-(NSInteger)numberOfItemsInMenu:(NSMenu *)menu {
+//    return 7;
+//}
+//
+//-(BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel {
+//    NSLog(@"hehehehheheh");
+//    return YES;
+//}
 @end

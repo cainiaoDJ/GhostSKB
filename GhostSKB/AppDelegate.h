@@ -12,6 +12,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     NSStatusItem *statusItem;
     BOOL statusItemSelected;
+    NSPopover* popover;
     __weak IBOutlet NSMenu *imenu;
 }
 
