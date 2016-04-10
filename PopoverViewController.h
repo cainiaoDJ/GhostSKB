@@ -13,7 +13,9 @@
 #import <AppKit/NSTableColumn.h>
 #import <AppKit/NSTableRowView.h>
 
-@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
+    NSMutableArray *defaultKeyBoards;
+}
 
 @property (weak) IBOutlet NSTableView *tableView;
 @end

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import <AppKit/AppKit.h>
 #import "PopoverViewController.h"
-
+#import "GHDefaultManager.h"
 @interface AppDelegate ()
 
 
@@ -23,12 +23,12 @@
     
     
     NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
-    [nc addObserver:self selector:@selector(handleEvent) name:NSWorkspaceDidActivateApplicationNotification object:NULL];
+    [nc addObserver:self selector:@selector(handleEvent:) name:NSWorkspaceDidActivateApplicationNotification object:NULL];
+    [GHDefaultManager getInstance];
     
     [self initStatusItem];
+    [self initPopover];
     
-    popover = [[NSPopover alloc] init];
-    popover.contentViewController = [[PopoverViewController alloc] init];
     
 }
 
@@ -40,6 +40,11 @@
     [imenu setDelegate:self];
 }
 
+- (void)initPopover {
+    popover = [[NSPopover alloc] init];
+    popover.behavior = NSPopoverBehaviorTransient;
+    popover.contentViewController = [[PopoverViewController alloc] init];
+}
 - (void)initStatusItem {
     statusItemSelected = false;
     NSString *imageName = @"ghost_dark_19";
@@ -56,33 +61,23 @@
     
 //    statusItem.menu = self->imenu;
     
-    [statusItem setAction:@selector(onStatusItemSelected:)];
+    [statusItem.button setAction:@selector(onStatusItemSelected:)];
 }
 
 - (void) onStatusItemSelected:(id) sender {
     statusItemSelected = !statusItemSelected;
-    if (sender == NULL) {
-        NSLog(@"sender null");
-    }
-    [self togglePopover:sender];
+    [self showPopover:sender];
 }
 
-- (void)showPopover:(id)sender show:(BOOL)show {
+- (void)showPopover:(id)sender {
     NSStatusBarButton* button = statusItem.button;
-    if (show) {
-        [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
-    }
-    else {
-        [popover performClose:button];
-    }
+    [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
 }
 
-- (void)togglePopover:(id)sender {
-    [self showPopover:sender show:statusItemSelected];
-}
 
-- (void) handleEvent {
-    NSLog(@"hello\n");
+- (void) handleEvent:(NSNotification *)noti {
+    NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
+    NSLog(@"%@", runningApp.bundleIdentifier);
 }
 
 #pragma mark - NSMenuDelegate
