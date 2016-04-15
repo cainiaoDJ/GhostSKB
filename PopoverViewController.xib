@@ -21,7 +21,7 @@
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNQ-eE-Uhk">
                     <rect key="frame" x="9" y="138" width="438" height="233"/>
                     <clipView key="contentView" ambiguous="YES" id="Myv-HS-gam">
-                        <rect key="frame" x="1" y="1" width="436" height="231"/>
+                        <rect key="frame" x="1.5" y="1" width="436" height="231"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" rowSizeStyle="automatic" viewBased="YES" id="XmG-JN-L1g">
@@ -49,7 +49,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-0o-c2J">
-                                                        <rect key="frame" x="262" y="8" width="76" height="26"/>
+                                                        <rect key="frame" x="152" y="7" width="105" height="26"/>
                                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oC6-gs-ikA" id="Ah3-Pd-seG">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
@@ -61,23 +61,22 @@
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="onInputSourcePopButtonClick:" target="-2" id="Uif-kq-EUX"/>
+                                                        </connections>
                                                     </popUpButton>
-                                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qtH-GE-u8i">
-                                                        <rect key="frame" x="121" y="8" width="76" height="26"/>
-                                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="bts-zI-WH2">
-                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="menu"/>
-                                                            <menu key="menu" id="f9B-Hb-aHa">
-                                                                <items>
-                                                                    <menuItem title="Item 1" id="vLo-NW-K8W"/>
-                                                                    <menuItem title="Item 2" id="tr3-Ta-fzG"/>
-                                                                    <menuItem title="Item 3" id="DcQ-dg-xUR"/>
-                                                                </items>
-                                                            </menu>
-                                                        </popUpButtonCell>
-                                                    </popUpButton>
+                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTH-yC-zPQ">
+                                                        <rect key="frame" x="17" y="8" width="29" height="25"/>
+                                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSApplicationIcon" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ok1-uZ-s86">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="onAppButtonClick:" target="-2" id="6Bd-Ex-BeO"/>
+                                                        </connections>
+                                                    </button>
                                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJ0-Kb-hGL">
-                                                        <rect key="frame" x="401" y="11" width="20" height="21"/>
+                                                        <rect key="frame" x="326" y="10" width="20" height="21"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wv3-tx-pLN">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -85,13 +84,6 @@
                                                         <connections>
                                                             <action selector="onRemoveDefault:" target="-2" id="lBS-Vf-j6e"/>
                                                         </connections>
-                                                    </button>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCq-zY-5Rp">
-                                                        <rect key="frame" x="13" y="12" width="61" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="501-Ms-pnK">
-                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
                                                     </button>
                                                 </subviews>
                                             </tableCellView>
@@ -130,8 +122,8 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="8R5-Q7-lKq">
-                        <rect key="frame" x="1" y="-14" width="0.0" height="15"/>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.5" horizontal="YES" id="8R5-Q7-lKq">
+                        <rect key="frame" x="1" y="217" width="436" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="dib-Wm-L44">
@@ -145,6 +137,7 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSApplicationIcon" width="128" height="128"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

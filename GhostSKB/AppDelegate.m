@@ -30,6 +30,19 @@
     [self initPopover];
     
     
+    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
+    
+    NSError *error = nil;
+    NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey,
+                           NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey, nil];
+    
+    NSArray *array = [[NSFileManager defaultManager]
+                      contentsOfDirectoryAtURL:[urls objectAtIndex:0]
+                      includingPropertiesForKeys:properties
+                      options:(NSDirectoryEnumerationSkipsHiddenFiles)
+                      error:&error];
+    NSLog(@"application count :%d", [array count]);
+    NSLog(@"first applications :%@", [[array objectAtIndex:0] description]);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -87,7 +100,7 @@
 
 - (void) handleEvent:(NSNotification *)noti {
     NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
-    NSLog(@"%@", runningApp.bundleIdentifier);
+//    NSLog(@"%@", runningApp.bundleIdentifier);
 }
 
 @end

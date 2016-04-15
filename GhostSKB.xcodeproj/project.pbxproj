@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		68A9C7CE1CB5374D00C9E8D0 /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A9C7CC1CB5374D00C9E8D0 /* PopoverViewController.m */; };
 		68A9C7CF1CB5374D00C9E8D0 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A9C7CD1CB5374D00C9E8D0 /* PopoverViewController.xib */; };
+		68ABAF261CC0C9190051A797 /* AppListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ABAF241CC0C9190051A797 /* AppListController.m */; };
+		68ABAF271CC0C9190051A797 /* AppListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68ABAF251CC0C9190051A797 /* AppListController.xib */; };
 		DE29E4F51CB9F1C1009E63DB /* GHInputDefaultCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4F41CB9F1C1009E63DB /* GHInputDefaultCellView.m */; };
 		DE29E4F81CB9F81A009E63DB /* GHDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4F71CB9F81A009E63DB /* GHDefaultManager.m */; };
 		DE29E4FB1CBA11EC009E63DB /* GHInputAddDefaultCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4FA1CBA11EB009E63DB /* GHInputAddDefaultCellView.m */; };
@@ -42,6 +44,9 @@
 		68A9C7CB1CB5374D00C9E8D0 /* PopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewController.h; sourceTree = "<group>"; };
 		68A9C7CC1CB5374D00C9E8D0 /* PopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewController.m; sourceTree = "<group>"; };
 		68A9C7CD1CB5374D00C9E8D0 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
+		68ABAF231CC0C9190051A797 /* AppListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListController.h; sourceTree = "<group>"; };
+		68ABAF241CC0C9190051A797 /* AppListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppListController.m; sourceTree = "<group>"; };
+		68ABAF251CC0C9190051A797 /* AppListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppListController.xib; sourceTree = "<group>"; };
 		DE29E4F31CB9F1C1009E63DB /* GHInputDefaultCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHInputDefaultCellView.h; sourceTree = "<group>"; };
 		DE29E4F41CB9F1C1009E63DB /* GHInputDefaultCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHInputDefaultCellView.m; sourceTree = "<group>"; };
 		DE29E4F61CB9F81A009E63DB /* GHDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDefaultManager.h; sourceTree = "<group>"; };
@@ -91,6 +96,9 @@
 		DE6634771CB21551009EE247 = {
 			isa = PBXGroup;
 			children = (
+				68ABAF231CC0C9190051A797 /* AppListController.h */,
+				68ABAF241CC0C9190051A797 /* AppListController.m */,
+				68ABAF251CC0C9190051A797 /* AppListController.xib */,
 				DE29E4F91CBA11EB009E63DB /* GHInputAddDefaultCellView.h */,
 				DE29E4FA1CBA11EB009E63DB /* GHInputAddDefaultCellView.m */,
 				DE29E4F61CB9F81A009E63DB /* GHDefaultManager.h */,
@@ -247,6 +255,7 @@
 				DE66348D1CB21552009EE247 /* MainMenu.xib in Resources */,
 				DE80AFFF1CB281C600821A0E /* ghost_dark_19.png in Resources */,
 				68A9C7CF1CB5374D00C9E8D0 /* PopoverViewController.xib in Resources */,
+				68ABAF271CC0C9190051A797 /* AppListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68A9C7CE1CB5374D00C9E8D0 /* PopoverViewController.m in Sources */,
+				68ABAF261CC0C9190051A797 /* AppListController.m in Sources */,
 				DE6634881CB21552009EE247 /* main.m in Sources */,
 				DE29E4F51CB9F1C1009E63DB /* GHInputDefaultCellView.m in Sources */,
 				DE6634851CB21552009EE247 /* AppDelegate.m in Sources */,

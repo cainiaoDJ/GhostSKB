@@ -7,18 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-#import <AppKit/NSTableView.h>
-#import <AppKit/NSTableCellView.h>
-#import <AppKit/NSTableColumn.h>
-#import <AppKit/NSTableRowView.h>
+#import <AppKit/AppKit.h>
 
 @interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
     NSMutableArray *defaultKeyBoards;
+    NSPopover *appPopOver;
 }
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSButton *addButton;
 - (IBAction)onAddDefault:(id)sender;
 - (IBAction)onRemoveDefault:(id)sender;
+- (IBAction)onAppButtonClick:(id)sender;
+- (IBAction)onInputSourcePopButtonClick:(id)sender;
 @end
