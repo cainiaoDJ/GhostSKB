@@ -71,7 +71,17 @@
 
 - (void)showPopover:(id)sender {
     NSStatusBarButton* button = statusItem.button;
-    [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
+    if (popover.isShown) {
+        [popover performClose:button];
+    }
+    else {
+        //get forcus
+        [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+        //show popover
+        [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
+    }
+
+
 }
 
 
@@ -80,29 +90,4 @@
     NSLog(@"%@", runningApp.bundleIdentifier);
 }
 
-#pragma mark - NSMenuDelegate
-
-//-(void)menuNeedsUpdate:(NSMenu *)menu {
-//    menu.title = @"hehe";
-//    NSInteger n = [[menu itemArray] count];
-//    NSLog(@"%d", n);
-//    NSLog(@"menuNeedsUpdate");
-//}
-
-//-(void)menuWillOpen:(NSMenu *)menu {
-//    NSLog(@"menuWillOpen");
-//}
-//
-//-(void)menuDidClose:(NSMenu *)menu {
-//    NSLog(@"menuDidClose");
-//}
-//
-//-(NSInteger)numberOfItemsInMenu:(NSMenu *)menu {
-//    return 7;
-//}
-//
-//-(BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel {
-//    NSLog(@"hehehehheheh");
-//    return YES;
-//}
 @end
