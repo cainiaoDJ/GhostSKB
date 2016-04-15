@@ -7,7 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class GHInputDefaultCellView;
 
-@interface GHInputDefaultCellView : NSTableCellView
+@interface GHInputDefaultCellView : NSTableCellView {
+
+
+}
+
 
 @end

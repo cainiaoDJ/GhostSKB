@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PopoverViewController">
             <connections>
+                <outlet property="addButton" destination="rsC-KX-axh" id="8YR-oC-fis"/>
                 <outlet property="tableView" destination="XmG-JN-L1g" id="Sf1-9C-hXA"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -14,23 +15,23 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="335" height="410"/>
+            <rect key="frame" x="0.0" y="0.0" width="456" height="410"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNQ-eE-Uhk">
-                    <rect key="frame" x="9" y="138" width="315" height="233"/>
+                    <rect key="frame" x="9" y="138" width="438" height="233"/>
                     <clipView key="contentView" ambiguous="YES" id="Myv-HS-gam">
-                        <rect key="frame" x="1" y="1" width="313" height="231"/>
+                        <rect key="frame" x="1" y="1" width="436" height="231"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" rowSizeStyle="automatic" viewBased="YES" id="XmG-JN-L1g">
-                                <rect key="frame" x="0.0" y="0.0" width="313" height="231"/>
+                                <rect key="frame" x="0.0" y="0.0" width="436" height="231"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="" width="310" minWidth="21" maxWidth="3.4028234663852886e+38" id="o9D-Ps-WQm">
+                                    <tableColumn identifier="" width="433" minWidth="21" maxWidth="3.4028234663852886e+38" id="o9D-Ps-WQm">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -44,18 +45,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="MainCell" id="B7h-cI-Oek" userLabel="MainCell" customClass="GHInputDefaultCellView">
-                                                <rect key="frame" x="1" y="1" width="312" height="43"/>
+                                                <rect key="frame" x="1" y="1" width="433" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCq-zY-5Rp">
-                                                        <rect key="frame" x="10" y="9" width="61" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="501-Ms-pnK">
-                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                    </button>
                                                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-0o-c2J">
-                                                        <rect key="frame" x="184" y="5" width="76" height="26"/>
+                                                        <rect key="frame" x="262" y="8" width="76" height="26"/>
                                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="oC6-gs-ikA" id="Ah3-Pd-seG">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
@@ -69,7 +63,7 @@
                                                         </popUpButtonCell>
                                                     </popUpButton>
                                                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qtH-GE-u8i">
-                                                        <rect key="frame" x="90" y="5" width="76" height="26"/>
+                                                        <rect key="frame" x="121" y="8" width="76" height="26"/>
                                                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="bts-zI-WH2">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
@@ -82,19 +76,29 @@
                                                             </menu>
                                                         </popUpButtonCell>
                                                     </popUpButton>
-                                                </subviews>
-                                            </tableCellView>
-                                            <tableCellView identifier="BottomCell" id="a5g-5Y-TeP" userLabel="BottomCell" customClass="GHInputAddDefaultCellView">
-                                                <rect key="frame" x="1" y="46" width="312" height="43"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9t-ax-fsN">
-                                                        <rect key="frame" x="243" y="4" width="63" height="32"/>
-                                                        <buttonCell key="cell" type="push" title="add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Tw-lr-FKF">
+                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJ0-Kb-hGL">
+                                                        <rect key="frame" x="401" y="11" width="20" height="21"/>
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wv3-tx-pLN">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="onRemoveDefault:" target="-2" id="lBS-Vf-j6e"/>
+                                                        </connections>
                                                     </button>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCq-zY-5Rp">
+                                                        <rect key="frame" x="13" y="12" width="61" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="501-Ms-pnK">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                    </button>
+                                                </subviews>
+                                            </tableCellView>
+                                            <tableCellView identifier="BottomCell" id="a5g-5Y-TeP" userLabel="BottomCell" customClass="GHInputAddDefaultCellView">
+                                                <rect key="frame" x="1" y="46" width="433" height="43"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3B-Mg-4fF">
                                                         <rect key="frame" x="14" y="13" width="222" height="17"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="add one key board default" drawsBackground="YES" id="jsw-Nv-uo8">
@@ -103,11 +107,25 @@
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </textFieldCell>
                                                     </textField>
+                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rsC-KX-axh">
+                                                        <rect key="frame" x="402" y="12" width="19" height="21"/>
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H94-OP-X8J">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                            <connections>
+                                                                <action selector="onAddDefault:" target="-2" id="COh-q4-kui"/>
+                                                            </connections>
+                                                        </buttonCell>
+                                                    </button>
                                                 </subviews>
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="-2" id="SzK-Rf-wX6"/>
+                                    <outlet property="delegate" destination="-2" id="DLb-ha-LWs"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -122,7 +140,11 @@
                     </scroller>
                 </scrollView>
             </subviews>
-            <point key="canvasLocation" x="594.5" y="266"/>
+            <point key="canvasLocation" x="655" y="266"/>
         </customView>
     </objects>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
+    </resources>
 </document>

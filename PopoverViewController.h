@@ -18,4 +18,7 @@
 }
 
 @property (weak) IBOutlet NSTableView *tableView;
+@property (weak) IBOutlet NSButton *addButton;
+- (IBAction)onAddDefault:(id)sender;
+- (IBAction)onRemoveDefault:(id)sender;
 @end
