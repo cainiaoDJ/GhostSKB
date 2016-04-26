@@ -29,20 +29,9 @@
     [self initStatusItem];
     [self initPopover];
     
-    
-    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
-    
-    NSError *error = nil;
-    NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey,
-                           NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey, nil];
-    
-    NSArray *array = [[NSFileManager defaultManager]
-                      contentsOfDirectoryAtURL:[urls objectAtIndex:0]
-                      includingPropertiesForKeys:properties
-                      options:(NSDirectoryEnumerationSkipsHiddenFiles)
-                      error:&error];
-    NSLog(@"application count :%d", [array count]);
-    NSLog(@"first applications :%@", [[array objectAtIndex:0] description]);
+//    [self testShowApps];
+    [self testAppFolderSearch];
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -95,6 +84,55 @@
     }
 }
 
+- (void)testShowApps {
+    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
+    
+    NSError *error = nil;
+    NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey,
+                           NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey, nil];
+    
+    NSArray *array = [[NSFileManager defaultManager]
+                      contentsOfDirectoryAtURL:[urls objectAtIndex:0]
+                      includingPropertiesForKeys:properties
+                      options:(NSDirectoryEnumerationSkipsHiddenFiles)
+                      error:&error];
+    NSLog(@"application count :%ld", [array count]);
+    NSLog(@"first applications :%@", [[array objectAtIndex:0] description]);
+    for (NSURL *url in array) {
+        NSLog(@"application: %@", [url description]);
+    }
+}
+
+- (void)testAppFolderSearch {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
+    NSURL *directoryUrl = [urls objectAtIndex:0];
+    NSArray *keys = [NSArray arrayWithObjects:NSURLIsApplicationKey, NSURLTypeIdentifierKey, NSURLLocalizedNameKey,nil];
+    NSDirectoryEnumerator *enumerator = [fileManager
+                                         enumeratorAtURL:directoryUrl
+                                         includingPropertiesForKeys:keys
+                                         options:(NSDirectoryEnumerationSkipsHiddenFiles)
+                                         errorHandler:^BOOL(NSURL * _Nonnull url, NSError * _Nonnull error) {
+                                             return YES;
+                                         }];
+    
+    for (NSURL *url in enumerator) {
+        NSError *error;
+        NSNumber *isDirectory = nil;
+        if (! [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
+            
+        }
+        else if ([isDirectory boolValue]) {
+            NSString *path = [url description];
+            if (![path containsString:@"Contents"]
+                && ![path containsString:@".framework"]
+                && ![path containsString:@"lib"]
+                && [[path pathExtension] isEqualToString:@"app"]) {
+                NSLog(@"path :%@", path);
+            }
+        }
+    }
+}
 
 - (void) handleEvent:(NSNotification *)noti {
     NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
