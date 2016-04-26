@@ -93,8 +93,6 @@
         //show popover
         [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
     }
-
-
 }
 
 
