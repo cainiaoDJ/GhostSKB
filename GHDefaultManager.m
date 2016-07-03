@@ -53,4 +53,10 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
     return arr;
 }
 
+- (void) addDefaultAppInputWithAppBundle: (NSString *)bundleId {
+    NSDictionary *keyBoardDefault = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"keyboards"];
+    NSString *key = [NSString stringWithFormat:@"ghdefault_%@", bundleId];
+    [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:key];
+}
+
 @end

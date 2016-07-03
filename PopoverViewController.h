@@ -9,10 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <AppKit/AppKit.h>
 
-@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
-    NSMutableArray *defaultKeyBoards;
-    NSPopover *appPopOver;
-}
+@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+
+@property (nonatomic,strong) NSMutableArray *defaultKeyBoards;
+@property (nonatomic,strong) NSPopover *appPopOver;
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSButton *addButton;

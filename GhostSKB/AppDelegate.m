@@ -23,7 +23,9 @@
     
     
     NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
-    [nc addObserver:self selector:@selector(handleEvent:) name:NSWorkspaceDidActivateApplicationNotification object:NULL];
+    [nc addObserver:self selector:@selector(handleAppActivateNoti:) name:NSWorkspaceDidActivateApplicationNotification object:NULL];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGHAppSelectedNoti:) name:@"GH_APP_SELECTED" object:NULL];
     [GHDefaultManager getInstance];
     
     [self initStatusItem];
@@ -72,8 +74,6 @@
     statusItem.image = normalImage;
     statusItem.alternateImage = alternateImage;
     
-//    statusItem.menu = self->imenu;
-    
     [statusItem.button setAction:@selector(onStatusItemSelected:)];
 }
 
@@ -93,14 +93,18 @@
         //show popover
         [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSRectEdgeMaxY];
     }
-
-
 }
 
 
-- (void) handleEvent:(NSNotification *)noti {
+- (void) handleAppActivateNoti:(NSNotification *)noti {
     NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
-//    NSLog(@"%@", runningApp.bundleIdentifier);
+//    NSLog(@"app is active: %@", runningApp.bundleIdentifier);
+}
+
+- (void) handleGHAppSelectedNoti:(NSNotification *)noti {
+    NSDictionary *userInfo = [noti userInfo];
+    NSURL *appUrl = [userInfo objectForKey:@"appUrl"];
+    NSLog(@"handleGHAppSelectedNoti---%@", [appUrl description]);
 }
 
 @end

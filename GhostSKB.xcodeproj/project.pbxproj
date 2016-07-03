@@ -14,6 +14,7 @@
 		DE29E4F51CB9F1C1009E63DB /* GHInputDefaultCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4F41CB9F1C1009E63DB /* GHInputDefaultCellView.m */; };
 		DE29E4F81CB9F81A009E63DB /* GHDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4F71CB9F81A009E63DB /* GHDefaultManager.m */; };
 		DE29E4FB1CBA11EC009E63DB /* GHInputAddDefaultCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29E4FA1CBA11EB009E63DB /* GHInputAddDefaultCellView.m */; };
+		DE4DEDB71D289F8C005E741F /* GHDefaultInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4DEDB61D289F8C005E741F /* GHDefaultInfo.m */; };
 		DE6634851CB21552009EE247 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6634841CB21552009EE247 /* AppDelegate.m */; };
 		DE6634881CB21552009EE247 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6634871CB21552009EE247 /* main.m */; };
 		DE66348A1CB21552009EE247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE6634891CB21552009EE247 /* Assets.xcassets */; };
@@ -53,6 +54,8 @@
 		DE29E4F71CB9F81A009E63DB /* GHDefaultManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDefaultManager.m; sourceTree = "<group>"; };
 		DE29E4F91CBA11EB009E63DB /* GHInputAddDefaultCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHInputAddDefaultCellView.h; sourceTree = "<group>"; };
 		DE29E4FA1CBA11EB009E63DB /* GHInputAddDefaultCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHInputAddDefaultCellView.m; sourceTree = "<group>"; };
+		DE4DEDB61D289F8C005E741F /* GHDefaultInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDefaultInfo.m; sourceTree = "<group>"; };
+		DE4DEDB81D289FA1005E741F /* GHDefaultInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDefaultInfo.h; sourceTree = "<group>"; };
 		DE6634801CB21552009EE247 /* GhostSKB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostSKB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6634831CB21552009EE247 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DE6634841CB21552009EE247 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 		DE6634771CB21551009EE247 = {
 			isa = PBXGroup;
 			children = (
+				DE4DEDB81D289FA1005E741F /* GHDefaultInfo.h */,
+				DE4DEDB61D289F8C005E741F /* GHDefaultInfo.m */,
 				68ABAF231CC0C9190051A797 /* AppListController.h */,
 				68ABAF241CC0C9190051A797 /* AppListController.m */,
 				68ABAF251CC0C9190051A797 /* AppListController.xib */,
@@ -282,6 +287,7 @@
 			files = (
 				68A9C7CE1CB5374D00C9E8D0 /* PopoverViewController.m in Sources */,
 				68ABAF261CC0C9190051A797 /* AppListController.m in Sources */,
+				DE4DEDB71D289F8C005E741F /* GHDefaultInfo.m in Sources */,
 				DE6634881CB21552009EE247 /* main.m in Sources */,
 				DE29E4F51CB9F1C1009E63DB /* GHInputDefaultCellView.m in Sources */,
 				DE6634851CB21552009EE247 /* AppDelegate.m in Sources */,
