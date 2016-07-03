@@ -30,10 +30,6 @@
     
     [self initStatusItem];
     [self initPopover];
-    
-//    [self testShowApps];
-    [self testAppFolderSearch];
-
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -49,6 +45,7 @@
     popover.behavior = NSPopoverBehaviorTransient;
     popover.contentViewController = [[PopoverViewController alloc] init];
 }
+
 - (void)initStatusItem {
     statusItemSelected = false;
     NSString *imageName = @"ghost_dark_19";
@@ -73,6 +70,7 @@
 
 - (void)showPopover:(id)sender {
     NSStatusBarButton* button = statusItem.button;
+    _statusBarButton = button;
     if (popover.isShown) {
         [popover performClose:button];
     }
@@ -84,56 +82,6 @@
     }
 }
 
-- (void)testShowApps {
-    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
-    
-    NSError *error = nil;
-    NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey,
-                           NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey, nil];
-    
-    NSArray *array = [[NSFileManager defaultManager]
-                      contentsOfDirectoryAtURL:[urls objectAtIndex:0]
-                      includingPropertiesForKeys:properties
-                      options:(NSDirectoryEnumerationSkipsHiddenFiles)
-                      error:&error];
-    NSLog(@"application count :%ld", [array count]);
-    NSLog(@"first applications :%@", [[array objectAtIndex:0] description]);
-    for (NSURL *url in array) {
-        NSLog(@"application: %@", [url description]);
-    }
-}
-
-- (void)testAppFolderSearch {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
-    NSURL *directoryUrl = [urls objectAtIndex:0];
-    NSArray *keys = [NSArray arrayWithObjects:NSURLIsApplicationKey, NSURLTypeIdentifierKey, NSURLLocalizedNameKey,nil];
-    NSDirectoryEnumerator *enumerator = [fileManager
-                                         enumeratorAtURL:directoryUrl
-                                         includingPropertiesForKeys:keys
-                                         options:(NSDirectoryEnumerationSkipsHiddenFiles)
-                                         errorHandler:^BOOL(NSURL * _Nonnull url, NSError * _Nonnull error) {
-                                             return YES;
-                                         }];
-    
-    for (NSURL *url in enumerator) {
-        NSError *error;
-        NSNumber *isDirectory = nil;
-        if (! [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
-            
-        }
-        else if ([isDirectory boolValue]) {
-            NSString *path = [url description];
-            if (![path containsString:@"Contents"]
-                && ![path containsString:@".framework"]
-                && ![path containsString:@"lib"]
-                && [[path pathExtension] isEqualToString:@"app"]) {
-                NSLog(@"path :%@", path);
-            }
-        }
-    }
-}
-
 - (void) handleAppActivateNoti:(NSNotification *)noti {
     NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
 //    NSLog(@"app is active: %@", runningApp.bundleIdentifier);
@@ -142,6 +90,11 @@
 - (void) handleGHAppSelectedNoti:(NSNotification *)noti {
     NSDictionary *userInfo = [noti userInfo];
     NSURL *appUrl = [userInfo objectForKey:@"appUrl"];
+    //get forcus
+    [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+    //show popover
+    [popover showRelativeToRect:_statusBarButton.bounds ofView:_statusBarButton preferredEdge:NSRectEdgeMaxY];
+
     NSLog(@"handleGHAppSelectedNoti---%@", [appUrl description]);
 }
 

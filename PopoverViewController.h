@@ -8,14 +8,22 @@
 
 #import <Cocoa/Cocoa.h>
 #import <AppKit/AppKit.h>
+#import "GHInputAddDefaultCellView.h"
 
-@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
-
+@interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
+    @private
+    NSInteger _currentSelectRow;
+    NSButton *_currentSelectedButton;
+    GHInputAddDefaultCellView *_currentSelectedCell;
+}
 @property (nonatomic,strong) NSMutableArray *defaultKeyBoards;
+@property (nonatomic,strong) NSMutableArray *availableInputMethods;
 @property (nonatomic,strong) NSPopover *appPopOver;
 
-@property (weak) IBOutlet NSTableView *tableView;
-@property (weak) IBOutlet NSButton *addButton;
+- (IBAction)terminateSelf:(id)sender;
+
+@property (assign) IBOutlet NSTableView *tableView;
+//@property (weak) IBOutlet NSButton *addButton;
 - (IBAction)onAddDefault:(id)sender;
 - (IBAction)onRemoveDefault:(id)sender;
 - (IBAction)onAppButtonClick:(id)sender;

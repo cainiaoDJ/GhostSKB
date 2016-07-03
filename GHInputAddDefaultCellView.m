@@ -10,6 +10,8 @@
 
 @implementation GHInputAddDefaultCellView
 
+@synthesize row;
+
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     

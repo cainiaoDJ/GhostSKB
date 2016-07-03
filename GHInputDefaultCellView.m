@@ -10,7 +10,6 @@
 
 @implementation GHInputDefaultCellView
 
-
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     

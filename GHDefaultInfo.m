@@ -31,4 +31,10 @@
     return self;
 }
 
+- (void)saveToDefaultStorage {
+    if (self.appUrl == NULL || self.appBundleId == NULL || self.defaultInput == NULL) {
+        return;
+    }
+}
+
 @end

@@ -10,6 +10,9 @@
 #import <AppKit/AppKit.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
+    @private
+    NSStatusBarButton *_statusBarButton;
+    @public
     NSStatusItem *statusItem;
     BOOL statusItemSelected;
     NSPopover* popover;

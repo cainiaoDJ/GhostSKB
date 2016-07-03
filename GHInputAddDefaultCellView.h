@@ -10,4 +10,7 @@
 
 @interface GHInputAddDefaultCellView : NSTableCellView
 
+@property(nonatomic, assign) NSInteger row;
+
+@property(nonatomic, retain) IBOutlet NSTextField* appName;
 @end
