@@ -35,6 +35,21 @@
     if (self.appUrl == NULL || self.appBundleId == NULL || self.defaultInput == NULL) {
         return;
     }
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    NSString *keyBoardDefaultInputKey = @"gh_default_keyboards";
+    NSData *data = [prefs objectForKey:keyBoardDefaultInputKey];
+    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSMutableDictionary *keyBoardDefault = [[NSMutableDictionary alloc] initWithDictionary:retrievedDictionary];
+    if (keyBoardDefault == NULL) {
+        keyBoardDefault = [NSMutableDictionary dictionaryWithCapacity:1];
+    }
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:self.appUrl, @"appUrl", self.defaultInput, @"defaultInput", self.appBundleId, @"appBundleId", nil];
+    [keyBoardDefault setObject:info forKey:self.appBundleId];
+    
+    [prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:(NSDictionary *)keyBoardDefault] forKey:keyBoardDefaultInputKey];
+    BOOL ok = [prefs synchronize];
+    
 }
 
 @end

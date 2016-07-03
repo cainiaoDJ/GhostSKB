@@ -10,6 +10,7 @@
 #import <AppKit/AppKit.h>
 #import "PopoverViewController.h"
 #import "GHDefaultManager.h"
+#import <Carbon/Carbon.h>
 @interface AppDelegate ()
 
 
@@ -84,9 +85,37 @@
 
 - (void) handleAppActivateNoti:(NSNotification *)noti {
     NSRunningApplication *runningApp = (NSRunningApplication *)[noti.userInfo objectForKey:@"NSWorkspaceApplicationKey"];
-//    NSLog(@"app is active: %@", runningApp.bundleIdentifier);
+    NSDictionary *defaultInput = [[GHDefaultManager getInstance] getDefaultKeyBoardsDict];
+    NSString *bundleIdentifier = runningApp.bundleIdentifier;
+    
+    NSDictionary *info = [defaultInput objectForKey:bundleIdentifier];
+    
+    if (info != NULL) {
+        [self changeInputSource:[[info objectForKey:@"defaultInput"] description]];
+    }
 }
 
+- (void)changeInputSource:(NSString *)inputId
+{
+    NSMutableString *thisID;
+    TISInputSourceRef inputSource = NULL;
+    
+    CFArrayRef availableInputs = TISCreateInputSourceList(NULL, false);
+    NSUInteger count = CFArrayGetCount(availableInputs);
+    for (int i = 0; i < count; i++) {
+        inputSource = (TISInputSourceRef)CFArrayGetValueAtIndex(availableInputs, i);
+        CFStringRef type = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceCategory);
+        if (!CFStringCompare(type, kTISCategoryKeyboardInputSource, 0)) {
+            thisID = (__bridge NSMutableString *)(TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID));
+            if ([thisID isEqualToString:inputId]) {
+                OSStatus err = TISSelectInputSource(inputSource);
+                if (err) printf("Error %i\n", (int)err);
+                break;
+            }
+        }
+    }
+
+}
 - (void) handleGHAppSelectedNoti:(NSNotification *)noti {
     NSDictionary *userInfo = [noti userInfo];
     NSURL *appUrl = [userInfo objectForKey:@"appUrl"];
@@ -94,8 +123,6 @@
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     //show popover
     [popover showRelativeToRect:_statusBarButton.bounds ofView:_statusBarButton preferredEdge:NSRectEdgeMaxY];
-
-    NSLog(@"handleGHAppSelectedNoti---%@", [appUrl description]);
 }
 
 @end

@@ -13,8 +13,8 @@
 @interface PopoverViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
     @private
     NSInteger _currentSelectRow;
-    NSButton *_currentSelectedButton;
     GHInputAddDefaultCellView *_currentSelectedCell;
+    NSMutableDictionary *_inputIdInfo;
 }
 @property (nonatomic,strong) NSMutableArray *defaultKeyBoards;
 @property (nonatomic,strong) NSMutableArray *availableInputMethods;

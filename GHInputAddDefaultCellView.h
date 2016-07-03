@@ -13,4 +13,6 @@
 @property(nonatomic, assign) NSInteger row;
 
 @property(nonatomic, retain) IBOutlet NSTextField* appName;
+@property(nonatomic, retain) IBOutlet NSPopUpButton* inputMethodsPopButon;
+@property(nonatomic, retain) IBOutlet NSButton* appButton;
 @end

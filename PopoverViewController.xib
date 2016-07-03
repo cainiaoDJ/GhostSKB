@@ -48,7 +48,7 @@
                                                 <rect key="frame" x="1" y="1" width="433" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-0o-c2J">
+                                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="99" translatesAutoresizingMaskIntoConstraints="NO" id="bAb-0o-c2J">
                                                         <rect key="frame" x="237" y="9" width="137" height="26"/>
                                                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ah3-Pd-seG">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -89,7 +89,9 @@
                                                     </button>
                                                 </subviews>
                                                 <connections>
+                                                    <outlet property="appButton" destination="fTH-yC-zPQ" id="DWN-dE-azx"/>
                                                     <outlet property="appName" destination="321-3g-I0m" id="qFf-7o-RM3"/>
+                                                    <outlet property="inputMethodsPopButon" destination="bAb-0o-c2J" id="jg4-m7-d4L"/>
                                                     <outlet property="menu" destination="TAW-gy-hdj" id="PYA-Ov-ObN"/>
                                                 </connections>
                                             </tableCellView>

@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) NSString* appUrl;
 @property (nonatomic, strong) NSString* appBundleId;
-@property (nonatomic, strong) NSString* defaultInput;
+@property (nonatomic, retain) NSString* defaultInput;
 
 - (id)initWithAppBundle:(NSString *)bundleId appUrl:(NSString *)url input:(NSString *)defaultInput;
 - (void)saveToDefaultStorage;

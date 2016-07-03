@@ -10,6 +10,7 @@
 
 @interface GHDefaultManager : NSObject
 
-+(GHDefaultManager *)getInstance;
++ (GHDefaultManager *)getInstance;
 - (NSMutableArray *)getDefaultKeyBoards;
+- (NSDictionary *)getDefaultKeyBoardsDict;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "GHDefaultManager.h"
+#import "GHDefaultInfo.h"
 static GHDefaultManager *sharedGHDefaultManager = nil;
 
 @implementation GHDefaultManager
@@ -16,7 +17,7 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
     if (self = [super init]) {
         //do something;
         NSDictionary *keyBoardDefaults = [NSDictionary dictionaryWithObjectsAndKeys:nil, nil, nil];
-        NSDictionary *appDefault = [NSDictionary dictionaryWithObjectsAndKeys: keyBoardDefaults, @"keyboards", nil];
+        NSDictionary *appDefault = [NSDictionary dictionaryWithObjectsAndKeys: keyBoardDefaults, @"gh_default_keyboards", nil];
         [[NSUserDefaults standardUserDefaults] registerDefaults: appDefault];
     }
     return self;
@@ -42,21 +43,28 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
 }
 
 - (NSMutableArray *)getDefaultKeyBoards {
-    NSDictionary *keyBoardDefault = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"keyboards"];
+
+    NSDictionary *keyBoardDefault = [self getDefaultKeyBoardsDict];
     NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:0];
     
     [keyBoardDefault enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         NSLog(@"%@", key);
-        [arr addObject:object];
+        
+        GHDefaultInfo *info = [[GHDefaultInfo alloc] initWithAppBundle:[object objectForKey:@"appBundleId"]
+                                                                appUrl:[[object objectForKey:@"appUrl"] description]
+                                                                input:[object objectForKey:@"defaultInput"]];
+        [arr addObject:info];
     }];
     
     return arr;
 }
 
-- (void) addDefaultAppInputWithAppBundle: (NSString *)bundleId {
-    NSDictionary *keyBoardDefault = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"keyboards"];
-    NSString *key = [NSString stringWithFormat:@"ghdefault_%@", bundleId];
-    [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:key];
+-(NSDictionary *)getDefaultKeyBoardsDict {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"gh_default_keyboards"];
+    NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSDictionary *keyBoardDefault = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+    return keyBoardDefault;
 }
+
 
 @end

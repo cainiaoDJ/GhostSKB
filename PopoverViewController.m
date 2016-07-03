@@ -53,7 +53,9 @@
     NSMutableString *thisID;
     CFArrayRef availableInputs = TISCreateInputSourceList(NULL, false);
     NSUInteger count = CFArrayGetCount(availableInputs);
-    
+    if (_inputIdInfo == NULL) {
+        _inputIdInfo = [[NSMutableDictionary alloc] initWithCapacity:3];
+    }
     for (int i = 0; i < count; i++) {
         TISInputSourceRef inputSource = (TISInputSourceRef)CFArrayGetValueAtIndex(availableInputs, i);
         CFStringRef type = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceCategory);
@@ -64,8 +66,10 @@
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[thisID description],@"id", [inputName description], @"inputName", nil];
             
             [self.availableInputMethods addObject:dict];
+            [_inputIdInfo setObject:[NSString stringWithFormat:@"%d", i] forKey:[thisID description]];
         }
     }
+    
 
 }
 
@@ -80,10 +84,24 @@
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     if (row < [self.defaultKeyBoards count]) {
-        GHDefaultInfo *defaultInfo = [self.defaultKeyBoards objectAtIndex:row];
-        defaultInfo.defaultInput = [[self.availableInputMethods objectAtIndex:0] objectForKey:@"id"];
-        
         GHInputAddDefaultCellView *view = [tableView makeViewWithIdentifier:@"MainCell" owner:self];
+        GHDefaultInfo *defaultInfo = [self.defaultKeyBoards objectAtIndex:row];
+        
+        if (defaultInfo.defaultInput == NULL) {
+            NSString *defaultInputId = (NSString *)[[self.availableInputMethods objectAtIndex:0] objectForKey:@"id"];
+            defaultInfo.defaultInput = defaultInputId;
+        }
+        else {
+             NSURL *appUrl = [NSURL URLWithString:defaultInfo.appUrl];
+            NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[appUrl path]];
+            _currentSelectedCell.appButton.image = icon;
+            NSBundle *appBundle =[NSBundle bundleWithPath:[appUrl path]];
+            NSString *appName = [[NSFileManager defaultManager] displayNameAtPath: [appBundle bundlePath]];
+            view.appName.stringValue = appName;
+            view.appButton.image = icon;
+        }
+
+        
         view.row = row;
         if ([view.menu numberOfItems] <= 0) {
             for (int i=0; i<[self.availableInputMethods count]; i++) {
@@ -92,8 +110,10 @@
                 NSMenuItem *item = [view.menu addItemWithTitle:inputName action:@selector(onInputSourceChange:) keyEquivalent:[[inputInfo objectForKey:@"id"] description]];
                 item.representedObject = [NSString stringWithFormat:@"%ld",(long)row];
             }
-
         }
+        int inputIndex = [[_inputIdInfo objectForKey:defaultInfo.defaultInput] intValue];
+        [view.inputMethodsPopButon selectItemAtIndex:inputIndex];
+        
         return view;
         
     }
@@ -134,10 +154,9 @@
 }
 
 - (IBAction)onAppButtonClick:(id)sender {
-    NSLog(@"onAppPopButtonClick");
+    
     NSButton *button = (NSButton *)sender;
     GHInputAddDefaultCellView *cellView = (GHInputAddDefaultCellView *)[button superview];
-    _currentSelectedButton = button;
     _currentSelectRow = cellView.row;
     _currentSelectedCell = cellView;
     [self showOpenPanel];
@@ -181,16 +200,26 @@
     
     if (clicked == NSFileHandlingPanelOKButton) {
         for (NSURL *url in [panel URLs]) {
+            
             NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
-            _currentSelectedButton.image = icon;
+            _currentSelectedCell.appButton.image = icon;
             NSBundle *selectedAppBundle =[NSBundle bundleWithURL:url];
-            NSString *bundleIdentifile = [selectedAppBundle bundleIdentifier];
+            NSString *bundleIdentifier = [selectedAppBundle bundleIdentifier];
             NSString *appName = [[NSFileManager defaultManager] displayNameAtPath: [selectedAppBundle bundlePath]];
             _currentSelectedCell.appName.stringValue = appName;
+            
+            NSString *selectedInputId = [[_currentSelectedCell.inputMethodsPopButon selectedItem] keyEquivalent];
+            
+            GHDefaultInfo *info = [self.defaultKeyBoards objectAtIndex:_currentSelectRow];
+            info.appUrl = [url path];
+            info.appBundleId = bundleIdentifier;
+            info.defaultInput = selectedInputId;
+            [info saveToDefaultStorage];
             
             // post application
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"appUrl", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GH_APP_SELECTED" object:NULL userInfo:userInfo];
+            
             break;
         }
     }
@@ -200,6 +229,7 @@
     NSMenuItem *item = (NSMenuItem *)sender;
     NSInteger row = [[item.representedObject description] integerValue];
     GHDefaultInfo *info = [self.defaultKeyBoards objectAtIndex:row];
+    info.defaultInput = [item keyEquivalent];
     [info saveToDefaultStorage];
 }
 
