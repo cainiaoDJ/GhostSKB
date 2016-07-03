@@ -20,6 +20,13 @@
 
 #pragma mark - tableview datasource and delegate
 
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return 10;
+}
 
+
+-(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    return nil;
+}
 
 @end
