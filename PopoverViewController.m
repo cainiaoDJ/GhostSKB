@@ -91,14 +91,18 @@
             NSString *defaultInputId = (NSString *)[[self.availableInputMethods objectAtIndex:0] objectForKey:@"id"];
             defaultInfo.defaultInput = defaultInputId;
         }
+        
         if (defaultInfo.appUrl != NULL && defaultInfo.appBundleId != NULL){
             NSURL *appUrl = [NSURL fileURLWithPath:defaultInfo.appUrl];
             NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[appUrl path]];
-            _currentSelectedCell.appButton.image = icon;
             NSBundle *appBundle =[NSBundle bundleWithPath:[appUrl path]];
             NSString *appName = [[NSFileManager defaultManager] displayNameAtPath: [appBundle bundlePath]];
             view.appName.stringValue = appName;
             view.appButton.image = icon;
+        }
+        else {
+            view.appButton.image = NULL;
+            view.appName.stringValue = @"";
         }
 
         
@@ -219,6 +223,13 @@
             info.defaultInput = selectedInputId;
             [info saveToDefaultStorage];
             
+            [self.defaultKeyBoards sortUsingComparator:^NSComparisonResult(id  _Nonnull a, id  _Nonnull b) {
+                GHDefaultInfo *aInfo = (GHDefaultInfo *)a;
+                GHDefaultInfo *bInfo = (GHDefaultInfo *)b;
+                return [aInfo.appBundleId compare:bInfo.appBundleId];
+            }];
+            [self.tableView reloadData];
+
             // post application
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"appUrl", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GH_APP_SELECTED" object:NULL userInfo:userInfo];
