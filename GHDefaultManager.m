@@ -64,5 +64,16 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
     return keyBoardDefault;
 }
 
+-(void)removeAppInputDefault:(NSString *)appBundleId {
+    NSDictionary *defaultInputs = [self getDefaultKeyBoardsDict];
+    if ([defaultInputs objectForKey:appBundleId] != NULL) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:defaultInputs];
+        [dict removeObjectForKey:appBundleId];
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:(NSDictionary *)dict] forKey:@"gh_default_keyboards"];
+        [prefs synchronize];
+    }
+}
+
 
 @end

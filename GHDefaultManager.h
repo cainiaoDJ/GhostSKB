@@ -13,4 +13,5 @@
 + (GHDefaultManager *)getInstance;
 - (NSMutableArray *)getDefaultKeyBoards;
 - (NSDictionary *)getDefaultKeyBoardsDict;
+- (void)removeAppInputDefault:(NSString *)appBundleId;
 @end

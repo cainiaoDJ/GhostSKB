@@ -92,7 +92,7 @@
             defaultInfo.defaultInput = defaultInputId;
         }
         else {
-             NSURL *appUrl = [NSURL URLWithString:defaultInfo.appUrl];
+            NSURL *appUrl = [NSURL fileURLWithPath:defaultInfo.appUrl];
             NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[appUrl path]];
             _currentSelectedCell.appButton.image = icon;
             NSBundle *appBundle =[NSBundle bundleWithPath:[appUrl path]];
@@ -149,6 +149,9 @@
 
 - (IBAction)onRemoveDefault:(id)sender {
     NSInteger row = [_tableView rowForView:(NSView *)sender];
+    GHDefaultInfo *info = [self.defaultKeyBoards objectAtIndex:row];
+    
+    [[GHDefaultManager getInstance] removeAppInputDefault:info.appBundleId];
     [self.defaultKeyBoards removeObjectAtIndex:row];
     [self.tableView reloadData];
 }
