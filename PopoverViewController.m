@@ -28,13 +28,13 @@
 
 - (void)viewWillAppear {
     [super viewWillAppear];
-    NSLog(@"view will appear");
+//    NSLog(@"view will appear");
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"view did load");
+//    NSLog(@"view did load");
     self.availableInputMethods = [[NSMutableArray alloc] initWithCapacity:1];
     [self getAlivibleInputMethods];
     _tableView.dataSource = self;

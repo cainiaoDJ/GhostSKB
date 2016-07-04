@@ -16,9 +16,6 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
 {
     if (self = [super init]) {
         //do something;
-        NSDictionary *keyBoardDefaults = [NSDictionary dictionaryWithObjectsAndKeys:nil, nil, nil];
-        NSDictionary *appDefault = [NSDictionary dictionaryWithObjectsAndKeys: keyBoardDefaults, @"gh_default_keyboards", nil];
-        [[NSUserDefaults standardUserDefaults] registerDefaults: appDefault];
     }
     return self;
 }
@@ -48,8 +45,6 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
     NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:0];
     
     [keyBoardDefault enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
-        NSLog(@"%@", key);
-        
         GHDefaultInfo *info = [[GHDefaultInfo alloc] initWithAppBundle:[object objectForKey:@"appBundleId"]
                                                                 appUrl:[[object objectForKey:@"appUrl"] description]
                                                                 input:[object objectForKey:@"defaultInput"]];
@@ -61,6 +56,9 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
 
 -(NSDictionary *)getDefaultKeyBoardsDict {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"gh_default_keyboards"];
+    if (data == NULL) {
+        return [[NSDictionary alloc] init];
+    }
     NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSDictionary *keyBoardDefault = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
     return keyBoardDefault;

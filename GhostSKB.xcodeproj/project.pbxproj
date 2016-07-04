@@ -413,7 +413,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GhostSKB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.dmx.GhostSKB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.GhostSKB;
 				PRODUCT_NAME = GhostSKB;
 			};
 			name = Debug;
@@ -425,7 +425,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GhostSKB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.dmx.GhostSKB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.GhostSKB;
 				PRODUCT_NAME = GhostSKB;
 			};
 			name = Release;
