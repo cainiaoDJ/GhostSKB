@@ -410,9 +410,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: dingmingxin20@gmail.com (7YYBHUQ87A)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GhostSKB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.GhostSKB;
 				PRODUCT_NAME = GhostSKB;
 			};
@@ -422,9 +424,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: dingmingxin20@gmail.com (7YYBHUQ87A)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GhostSKB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmx.GhostSKB;
 				PRODUCT_NAME = GhostSKB;
 			};
