@@ -22,6 +22,7 @@
 
 - (IBAction)terminateSelf:(id)sender;
 
+- (IBAction)onAboutPress:(id)sender;
 @property (assign) IBOutlet NSTableView *tableView;
 //@property (weak) IBOutlet NSButton *addButton;
 - (IBAction)onAddDefault:(id)sender;

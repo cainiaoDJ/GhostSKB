@@ -250,4 +250,8 @@
 - (IBAction)terminateSelf:(id)sender {
     [[NSApplication sharedApplication] terminate:self];
 }
+
+- (IBAction)onAboutPress:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://dingmingxin.github.io/blog/2016/07/04/ghostskb/"]];
+}
 @end
