@@ -50,7 +50,11 @@ static GHDefaultManager *sharedGHDefaultManager = nil;
                                                                 input:[object objectForKey:@"defaultInput"]];
         [arr addObject:info];
     }];
-    
+    [arr sortUsingComparator:^NSComparisonResult(id  _Nonnull a, id  _Nonnull b) {
+        GHDefaultInfo *aInfo = (GHDefaultInfo *)a;
+        GHDefaultInfo *bInfo = (GHDefaultInfo *)b;
+        return [aInfo.appBundleId compare:bInfo.appBundleId];
+    }];
     return arr;
 }
 

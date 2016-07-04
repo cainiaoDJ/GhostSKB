@@ -91,7 +91,7 @@
             NSString *defaultInputId = (NSString *)[[self.availableInputMethods objectAtIndex:0] objectForKey:@"id"];
             defaultInfo.defaultInput = defaultInputId;
         }
-        else {
+        if (defaultInfo.appUrl != NULL && defaultInfo.appBundleId != NULL){
             NSURL *appUrl = [NSURL fileURLWithPath:defaultInfo.appUrl];
             NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[appUrl path]];
             _currentSelectedCell.appButton.image = icon;
