@@ -1,7 +1,7 @@
 # GhostSKB
 Smart Key Board Switcher like a ghost
 
-![logo of ghostkbd](https://github.com/dingmingxin/GhostSKB/blob/master/ghostkbd-512.png)
+![logo of ghostkbd](https://github.com/dingmingxin/GhostSKB/blob/master/ghostkbd-256.png)
 
 # Description
 
